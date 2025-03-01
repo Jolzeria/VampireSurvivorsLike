@@ -22,15 +22,19 @@ public class PlayerController : MonoBehaviour
 
     public float pickupRange = 1.5f;
 
+    // 未激活武器，已激活武器
     public List<Weapon> unassignedWeapons, assignedWeapons;
+    // 满级武器
+    [HideInInspector] public List<Weapon> fullyLevelWeapons;
 
     public int maxWeapons = 3;
-    
+
     void Start()
     {
         _animator = transform.Find("Sprite").GetComponent<Animator>();
         _playerUnit = GetComponent<CharacterUnit>();
         _healthSlider = transform.Find("HealthCanvas/Slider").GetComponent<Slider>();
+        fullyLevelWeapons = new List<Weapon>();
 
         StartCoroutine(WaitBeUnitInit());
     }
@@ -97,15 +101,15 @@ public class PlayerController : MonoBehaviour
         {
             assignedWeapons.Add(unassignedWeapons[weaponNumber]);
             unassignedWeapons[weaponNumber].gameObject.SetActive(true);
-            
+
             unassignedWeapons.RemoveAt(weaponNumber);
         }
     }
-    
+
     public void AddWeapon(Weapon weaponToAdd)
     {
         weaponToAdd.gameObject.SetActive(true);
-        
+
         assignedWeapons.Add(weaponToAdd);
         unassignedWeapons.Remove(weaponToAdd);
     }

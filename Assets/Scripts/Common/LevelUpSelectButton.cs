@@ -53,4 +53,10 @@ public class LevelUpSelectButton : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
+
+    public void SkipLevelUp()
+    {
+        UIManager.Instance.levelUpPanel.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+    }
 }

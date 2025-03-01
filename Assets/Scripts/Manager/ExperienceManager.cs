@@ -86,7 +86,9 @@ public class ExperienceManager : Singleton<ExperienceManager>
         List<Weapon> availableWeapons = new List<Weapon>();
         availableWeapons.AddRange(PlayerController.Instance.assignedWeapons);
 
-        if (PlayerController.Instance.assignedWeapons.Count < PlayerController.Instance.maxWeapons)
+        // 已激活武器数小于最大武器数才显示可激活武器
+        if (PlayerController.Instance.assignedWeapons.Count + PlayerController.Instance.fullyLevelWeapons.Count <
+            PlayerController.Instance.maxWeapons)
         {
             availableWeapons.AddRange(PlayerController.Instance.unassignedWeapons);
         }
@@ -104,6 +106,19 @@ public class ExperienceManager : Singleton<ExperienceManager>
         for (int i = 0; i < weaponsToUpgrade.Count; i++)
         {
             UIManager.Instance.levelUpButtons[i].UpdateButtonDisplay(weaponsToUpgrade[i]);
+        }
+
+        // 只显示可升级的按钮
+        for (int i = 0; i < UIManager.Instance.levelUpButtons.Length; i++)
+        {
+            if (i < weaponsToUpgrade.Count)
+            {
+                UIManager.Instance.levelUpButtons[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                UIManager.Instance.levelUpButtons[i].gameObject.SetActive(false);
+            }
         }
     }
 }
