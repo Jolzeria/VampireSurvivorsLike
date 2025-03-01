@@ -11,44 +11,44 @@ public class EnemyController : MonoBehaviour
     public float damage;
     // 伤害间隔
     public float hitWaitTime = 1f;
-    private float hitCounter;
+    private float hitTimer;
     // 怪物生命值
     public float health;
 
     // 击退持续时间
     public float knockBackTime = .5f;
-    private float knockBackCounter;
+    private float knockBackTimer;
     
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _target = InstanceManager.Instance.Get(InstanceType.Player);
-        hitCounter = hitWaitTime;
+        hitTimer = hitWaitTime;
 
         GetComponent<EnemyUnit>().health = health;
     }
 
     private void Update()
     {
-        if (hitCounter > 0f)
+        if (hitTimer > 0f)
         {
-            hitCounter -= Time.deltaTime;
+            hitTimer -= Time.deltaTime;
         }
     }
 
     private void FixedUpdate()
     {
         // 击退
-        if (knockBackCounter > 0)
+        if (knockBackTimer > 0)
         {
-            knockBackCounter -= Time.fixedDeltaTime;
+            knockBackTimer -= Time.fixedDeltaTime;
 
             if (moveSpeed > 0)
             {
                 moveSpeed = -moveSpeed * 2f;
             }
 
-            if (knockBackCounter <= 0)
+            if (knockBackTimer <= 0)
             {
                 moveSpeed = Mathf.Abs(moveSpeed * .5f);
             }
@@ -60,7 +60,7 @@ public class EnemyController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         // 对玩家造成伤害
-        if (other.gameObject.CompareTag("Player") && hitCounter <= 0f)
+        if (other.gameObject.CompareTag("Player") && hitTimer <= 0f)
         {
             var enemyUnit = GetComponent<BeUnit>();
             var snapShot = new SnapShot(enemyUnit);
@@ -73,12 +73,12 @@ public class EnemyController : MonoBehaviour
             };
             EventHandler.ExecuteEvent(damageInfo.receiver, GameEventEnum.DamageProcess, damageInfo);
 
-            hitCounter = hitWaitTime;
+            hitTimer = hitWaitTime;
         }
     }
 
     public void KnockBack()
     {
-        knockBackCounter = knockBackTime;
+        knockBackTimer = knockBackTime;
     }
 }
