@@ -95,25 +95,25 @@ public class EnemySpawner : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.Enemy1_Bee:
-                prefab = Resources.Load<GameObject>("Enemy1_Bee");
+                prefab = Resources.Load<GameObject>("Enemy/Enemy1_Bee");
                 break;
             case EnemyType.Enemy2_Slime:
-                prefab = Resources.Load<GameObject>("Enemy2_Slime");
+                prefab = Resources.Load<GameObject>("Enemy/Enemy2_Slime");
                 break;
             case EnemyType.Enemy3_Scorpion:
-                prefab = Resources.Load<GameObject>("Enemy3_Scorpion");
+                prefab = Resources.Load<GameObject>("Enemy/Enemy3_Scorpion");
                 break;
             case EnemyType.Enemy4_IceWolf:
-                prefab = Resources.Load<GameObject>("Enemy4_IceWolf");
+                prefab = Resources.Load<GameObject>("Enemy/Enemy4_IceWolf");
                 break;
             case EnemyType.Enemy5_FireWolf:
-                prefab = Resources.Load<GameObject>("Enemy5_FireWolf");
+                prefab = Resources.Load<GameObject>("Enemy/Enemy5_FireWolf");
                 break;
             case EnemyType.Enemy6_TreeMan:
-                prefab = Resources.Load<GameObject>("Enemy6_TreeMan");
+                prefab = Resources.Load<GameObject>("Enemy/Enemy6_TreeMan");
                 break;
             case EnemyType.Enemy7_Griffin:
-                prefab = Resources.Load<GameObject>("Enemy7_Griffin");
+                prefab = Resources.Load<GameObject>("Enemy/Enemy7_Griffin");
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(enemyType), enemyType, null);
