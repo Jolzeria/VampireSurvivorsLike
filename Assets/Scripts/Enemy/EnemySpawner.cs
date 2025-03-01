@@ -5,14 +5,28 @@ using Random = UnityEngine.Random;
 
 public enum EnemyType
 {
-    Bee
+    Enemy1_Bee,
+    Enemy2_Slime,
+    Enemy3_Scorpion,
+    Enemy4_IceWolf,
+    Enemy5_FireWolf,
+    Enemy6_TreeMan,
+    Enemy7_Griffin
+}
+
+[System.Serializable]
+public class WaveInfo
+{
+    public EnemyType enemyTypeToSpawn;
+    public float waveLength = 10f;
+    public float timeBetweenSpawns = 1f;
 }
 
 public class EnemySpawner : MonoBehaviour
 {
-    public EnemyType spawnEnemyType;
-    public float timeToSpawn;
-    private float spawnCounter;
+    // public EnemyType spawnEnemyType;
+    // public float timeToSpawn;
+    private float spawnTimer;
     public Transform minSpawn, maxSpawn;
 
     private Transform _target;
@@ -23,26 +37,50 @@ public class EnemySpawner : MonoBehaviour
     public int checkPerFrame;
     private int enemyToCheck;
 
+    public List<WaveInfo> waveInfos;
+    private int currentWave;
+    private float waveTimer;
+
     void Start()
     {
         _target = InstanceManager.Instance.Get(InstanceType.Player);
-        spawnCounter = timeToSpawn;
+        // spawnTimer = timeToSpawn;
         despawnDistance = Vector3.Distance(transform.position, maxSpawn.position) + 5f;
         spawnedEnemies = new List<GameObject>();
         enemyToCheck = 0;
+
+        currentWave = -1;
+        GoToNextWave();
     }
 
     void Update()
     {
-        if (spawnedEnemies == null)
-            return;
-        
-        spawnCounter -= Time.deltaTime;
-        if (spawnCounter <= 0f)
+        /*spawnTimer -= Time.deltaTime;
+        if (spawnTimer <= 0f)
         {
-            spawnCounter = timeToSpawn;
+            spawnTimer = timeToSpawn;
 
             spawnedEnemies.Add(SpawnEnemy(spawnEnemyType));
+        }*/
+
+        if (InstanceManager.Instance.Get(InstanceType.Player).gameObject.activeSelf)
+        {
+            if (currentWave < waveInfos.Count)
+            {
+                waveTimer -= Time.deltaTime;
+                if (waveTimer <= 0)
+                {
+                    GoToNextWave();
+                }
+
+                spawnTimer -= Time.deltaTime;
+                if (spawnTimer <= 0)
+                {
+                    spawnTimer = waveInfos[currentWave].timeBetweenSpawns;
+                    
+                    spawnedEnemies.Add(SpawnEnemy(waveInfos[currentWave].enemyTypeToSpawn));
+                }
+            }
         }
 
         // 刷怪点跟随玩家
@@ -56,14 +94,32 @@ public class EnemySpawner : MonoBehaviour
         GameObject prefab = null;
         switch (enemyType)
         {
-            case EnemyType.Bee:
-                prefab = Resources.Load<GameObject>("Enemy_Bee");
+            case EnemyType.Enemy1_Bee:
+                prefab = Resources.Load<GameObject>("Enemy1_Bee");
+                break;
+            case EnemyType.Enemy2_Slime:
+                prefab = Resources.Load<GameObject>("Enemy2_Slime");
+                break;
+            case EnemyType.Enemy3_Scorpion:
+                prefab = Resources.Load<GameObject>("Enemy3_Scorpion");
+                break;
+            case EnemyType.Enemy4_IceWolf:
+                prefab = Resources.Load<GameObject>("Enemy4_IceWolf");
+                break;
+            case EnemyType.Enemy5_FireWolf:
+                prefab = Resources.Load<GameObject>("Enemy5_FireWolf");
+                break;
+            case EnemyType.Enemy6_TreeMan:
+                prefab = Resources.Load<GameObject>("Enemy6_TreeMan");
+                break;
+            case EnemyType.Enemy7_Griffin:
+                prefab = Resources.Load<GameObject>("Enemy7_Griffin");
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(enemyType), enemyType, null);
         }
 
-        var obj = GameObject.Instantiate(prefab, GetSpawnPoint(), transform.rotation);
+        var obj = GameObject.Instantiate(prefab, GetSpawnPoint(), Quaternion.identity);
         obj.SetActive(true);
 
         return obj;
@@ -142,5 +198,18 @@ public class EnemySpawner : MonoBehaviour
                 checkTarget = 0;
             }
         }
+    }
+
+    public void GoToNextWave()
+    {
+        currentWave++;
+
+        if (currentWave >= waveInfos.Count)
+        {
+            currentWave = waveInfos.Count - 1;
+        }
+
+        waveTimer = waveInfos[currentWave].waveLength;
+        spawnTimer = waveInfos[currentWave].timeBetweenSpawns;
     }
 }

@@ -8,13 +8,15 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
 
     private Animator _animator;
-    private BeUnit _charUnit;
+    private CharacterUnit _playerUnit;
     private Slider _healthSlider;
+
+    public float pickupRange = 1.5f;
     
     void Start()
     {
         _animator = transform.Find("Sprite").GetComponent<Animator>();
-        _charUnit = GetComponent<BeUnit>();
+        _playerUnit = GetComponent<CharacterUnit>();
         _healthSlider = transform.Find("HealthCanvas/Slider").GetComponent<Slider>();
 
         StartCoroutine(WaitBeUnitInit());
@@ -22,12 +24,12 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator WaitBeUnitInit()
     {
-        while (!_charUnit.AttributeIsInit())
+        while (!_playerUnit.AttributeIsInit())
         {
             yield return null;
         }
         
-        _healthSlider.maxValue = _charUnit.GetAttrValue(AttributeType.MaxHp);
+        _healthSlider.maxValue = _playerUnit.GetAttrValue(AttributeType.MaxHp);
         SetSliderValue();
     }
 
@@ -70,6 +72,6 @@ public class PlayerController : MonoBehaviour
 
     public void SetSliderValue()
     {
-        _healthSlider.value = _charUnit.GetAttrValue(AttributeType.CurHp);
+        _healthSlider.value = _playerUnit.GetAttrValue(AttributeType.CurHp);
     }
 }

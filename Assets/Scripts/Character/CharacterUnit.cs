@@ -52,4 +52,9 @@ public class CharacterUnit : BeUnit
             return;
         }
     }
+    
+    public void GetExp(int amountToGet)
+    {
+        AddAttrValue(AttributeType.Exp, amountToGet);
+    }
 }

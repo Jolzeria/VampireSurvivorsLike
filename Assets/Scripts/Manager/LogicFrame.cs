@@ -20,6 +20,7 @@ public class LogicFrame : MonoBehaviour
 
     private void OnDestroy()
     {
+        ExperienceManager.Instance.UnInit();
         DamageTextManager.Instance.UnInit();
         DamageTextPool.Instance.UnInit();
         InstanceManager.Instance.UnInit();

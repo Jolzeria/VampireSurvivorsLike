@@ -9,7 +9,7 @@ public enum AttributeType
     DEF,
     Score,
     Exp,
-    LifeTime,
+    Level,
     Max
 }
 

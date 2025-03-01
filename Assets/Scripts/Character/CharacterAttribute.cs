@@ -13,6 +13,10 @@ public class CharacterAttribute : BaseAttribute
                 return 0;
             case AttributeType.DEF:
                 return 0;
+            case AttributeType.Exp:
+                return 0;
+            case AttributeType.Level:
+                return 0;
             default:
                 return 0;
         }
