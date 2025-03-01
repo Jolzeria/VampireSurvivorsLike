@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 
 public class EnemyUnit : BeUnit
 {
     private EnemyController _enemyController;
+    [NonSerialized]
+    public EnemyType enemyType;
+    [NonSerialized]
     public float health;
 
     protected override void Init()
@@ -53,6 +57,8 @@ public class EnemyUnit : BeUnit
         float curHp = GetAttrValue(AttributeType.CurHp);
         if (curHp <= 0)
         {
+            // 生成经验
+            ExperienceManager.Instance.SpawnExp(transform.position, enemyType);
             Destroy(gameObject);
             return;
         }
@@ -64,7 +70,6 @@ public class EnemyUnit : BeUnit
         }
 
         // 通知伤害跳字管理器
-        
         DamageTextManager.Instance.Add(new DamageTextManager.DamageTextData()
             {position = damageInfo.receiver.transform.position, damage = Mathf.RoundToInt(changedHp)});
     }

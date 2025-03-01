@@ -18,6 +18,8 @@ public class EnemyController : MonoBehaviour
     // 击退持续时间
     public float knockBackTime = .5f;
     private float knockBackTimer;
+
+    public EnemyType enemyType;
     
     private void Start()
     {
@@ -26,6 +28,7 @@ public class EnemyController : MonoBehaviour
         hitTimer = hitWaitTime;
 
         GetComponent<EnemyUnit>().health = health;
+        GetComponent<EnemyUnit>().enemyType = enemyType;
     }
 
     private void Update()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,5 +30,39 @@ public class ExperienceManager : Singleton<ExperienceManager>
     public void GetExp(int amountToGet)
     {
         _playerUnit.GetExp(amountToGet);
+    }
+
+    public void SpawnExp(Vector3 position, EnemyType enemyType)
+    {
+        GameObject prefab = null;
+        switch (enemyType)
+        {
+            case EnemyType.Enemy1_Bee:
+                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
+                break;
+            case EnemyType.Enemy2_Slime:
+                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
+                break;
+            case EnemyType.Enemy3_Scorpion:
+                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
+                break;
+            case EnemyType.Enemy4_IceWolf:
+                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
+                break;
+            case EnemyType.Enemy5_FireWolf:
+                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
+                break;
+            case EnemyType.Enemy6_TreeMan:
+                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
+                break;
+            case EnemyType.Enemy7_Griffin:
+                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(enemyType), enemyType, null);
+        }
+
+        var obj = GameObject.Instantiate(prefab, position, Quaternion.identity);
+        obj.SetActive(true);
     }
 }
