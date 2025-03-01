@@ -8,6 +8,7 @@ public enum InstanceType
 {
     None,
     Player,
+    UICavnas,
     Max
 }
 

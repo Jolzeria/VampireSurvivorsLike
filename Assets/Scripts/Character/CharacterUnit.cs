@@ -1,16 +1,27 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class CharacterUnit : BeUnit
 {
+    public List<int> expLevels;
+    public int levelCount = 100;
+    
     protected override void Init()
     {
         base.Init();
 
         attribute = new CharacterAttribute();
         attribute.Init();
+
+        while (expLevels.Count < levelCount)
+        {
+            expLevels.Add(Mathf.CeilToInt(expLevels[expLevels.Count - 1] * 1.1f));
+        }
+
+        ExperienceManager.Instance.expLevels = expLevels;
     }
 
     protected override void UnInit()
@@ -40,9 +51,19 @@ public class CharacterUnit : BeUnit
     
     private void DamageProcess(DamageInfo damageInfo)
     {
-        // 扣血
-        MinusAttrValue(AttributeType.CurHp, damageInfo.damage);
-        // 更新slider
+        var damageNumber = damageInfo.damage;
+        // 受伤
+        if (damageNumber > 0)
+        {
+            MinusAttrValue(AttributeType.CurHp, damageNumber);
+        } 
+        // 回复
+        else if (damageNumber < 0)
+        {
+            AddAttrValue(AttributeType.CurHp, damageNumber);
+        }
+
+        // 更新血条slider
         GetComponent<PlayerController>().SetSliderValue();
         
         float curHp = GetAttrValue(AttributeType.CurHp);
@@ -51,10 +72,5 @@ public class CharacterUnit : BeUnit
             gameObject.SetActive(false);
             return;
         }
-    }
-    
-    public void GetExp(int amountToGet)
-    {
-        AddAttrValue(AttributeType.Exp, amountToGet);
     }
 }

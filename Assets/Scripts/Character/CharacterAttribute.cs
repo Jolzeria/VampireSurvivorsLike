@@ -16,7 +16,7 @@ public class CharacterAttribute : BaseAttribute
             case AttributeType.Exp:
                 return 0;
             case AttributeType.Level:
-                return 0;
+                return 1;
             default:
                 return 0;
         }
