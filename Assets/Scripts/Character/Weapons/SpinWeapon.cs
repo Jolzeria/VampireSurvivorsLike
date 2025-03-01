@@ -27,9 +27,14 @@ public class SpinWeapon : Weapon
         {
             spawnTimer = timeBetweenSpawn;
 
-            var obj = Instantiate(fireballToSpawn, fireballToSpawn.position, fireballToSpawn.rotation, holder)
-                .gameObject;
-            obj.SetActive(true);
+            for (int i = 0; i < stats[weaponLevel].amount; i++)
+            {
+                float rotZ = 360f / stats[weaponLevel].amount * i;
+                
+                var obj = Instantiate(fireballToSpawn, fireballToSpawn.position, Quaternion.Euler(0f, 0f, rotZ), holder)
+                    .gameObject;
+                obj.SetActive(true);
+            }
         }
 
         if (isStatsUpdated)
@@ -45,6 +50,7 @@ public class SpinWeapon : Weapon
         enemyDamager.damageAmount = stats[weaponLevel].damage;
         transform.localScale = Vector3.one * stats[weaponLevel].range;
         timeBetweenSpawn = stats[weaponLevel].timeBetweenAttacks;
+        enemyDamager.enableLifeTime = true;
         enemyDamager.lifeTime = stats[weaponLevel].duration;
         spawnTimer = 0f;
     }

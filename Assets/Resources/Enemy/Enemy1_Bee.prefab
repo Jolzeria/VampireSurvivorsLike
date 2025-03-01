@@ -117,7 +117,7 @@ MonoBehaviour:
   health: 10
   knockBackTime: 0.2
   enemyType: 0
-  expValue: 10
+  expValue: 100
 --- !u!114 &361942679964379428
 MonoBehaviour:
   m_ObjectHideFlags: 0
