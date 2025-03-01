@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ExpPickup : MonoBehaviour
 {
+    [NonSerialized]
     public int expValue;
 
     private bool isMovingToPlayer;

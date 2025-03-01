@@ -32,37 +32,13 @@ public class ExperienceManager : Singleton<ExperienceManager>
         _playerUnit.GetExp(amountToGet);
     }
 
-    public void SpawnExp(Vector3 position, EnemyType enemyType)
+    public void SpawnExp(Vector3 position, EnemyType enemyType, int expValue)
     {
         GameObject prefab = null;
-        switch (enemyType)
-        {
-            case EnemyType.Enemy1_Bee:
-                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
-                break;
-            case EnemyType.Enemy2_Slime:
-                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
-                break;
-            case EnemyType.Enemy3_Scorpion:
-                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
-                break;
-            case EnemyType.Enemy4_IceWolf:
-                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
-                break;
-            case EnemyType.Enemy5_FireWolf:
-                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
-                break;
-            case EnemyType.Enemy6_TreeMan:
-                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
-                break;
-            case EnemyType.Enemy7_Griffin:
-                prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(enemyType), enemyType, null);
-        }
+        prefab = Resources.Load<GameObject>("Pickups/Experience Pickup");
 
         var obj = GameObject.Instantiate(prefab, position, Quaternion.identity);
+        obj.GetComponent<ExpPickup>().expValue = expValue;
         obj.SetActive(true);
     }
 }

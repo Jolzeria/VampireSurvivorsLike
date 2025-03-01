@@ -198,8 +198,10 @@ MonoBehaviour:
   moveSpeed: 1.5
   damage: 20
   hitWaitTime: 1
-  health: 20
+  health: 100
   knockBackTime: 0.2
+  enemyType: 0
+  expValue: 100
 --- !u!114 &6332302246274907208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,4 +229,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097b0af268fe5ed409f271ca0d260244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0

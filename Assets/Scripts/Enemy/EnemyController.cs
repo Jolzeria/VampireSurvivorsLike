@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     private float knockBackTimer;
 
     public EnemyType enemyType;
+    public int expValue = 1;
     
     private void Start()
     {
@@ -29,6 +30,7 @@ public class EnemyController : MonoBehaviour
 
         GetComponent<EnemyUnit>().health = health;
         GetComponent<EnemyUnit>().enemyType = enemyType;
+        GetComponent<EnemyUnit>().expValue = expValue;
     }
 
     private void Update()

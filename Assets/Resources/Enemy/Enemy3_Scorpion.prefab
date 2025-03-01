@@ -200,6 +200,8 @@ MonoBehaviour:
   hitWaitTime: 1
   health: 20
   knockBackTime: 0.2
+  enemyType: 0
+  expValue: 3
 --- !u!114 &2304973461491515933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,4 +229,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097b0af268fe5ed409f271ca0d260244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0

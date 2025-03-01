@@ -8,6 +8,8 @@ public class EnemyUnit : BeUnit
     public EnemyType enemyType;
     [NonSerialized]
     public float health;
+    [NonSerialized]
+    public int expValue;
 
     protected override void Init()
     {
@@ -55,10 +57,11 @@ public class EnemyUnit : BeUnit
         MinusAttrValue(AttributeType.CurHp, changedHp);
 
         float curHp = GetAttrValue(AttributeType.CurHp);
+        // 怪物死亡
         if (curHp <= 0)
         {
             // 生成经验
-            ExperienceManager.Instance.SpawnExp(transform.position, enemyType);
+            ExperienceManager.Instance.SpawnExp(transform.position, enemyType, expValue);
             Destroy(gameObject);
             return;
         }
