@@ -9,10 +9,15 @@ public class UIManager : Singleton<UIManager>
     private Transform _UICanvas;
     private TMP_Text levelText;
     private Slider levelSlider;
+
+    public GameObject levelUpPanel;
+    public LevelUpSelectButton[] levelUpButtons;
     
     public override void Init()
     {
         base.Init();
+
+        levelUpButtons = new LevelUpSelectButton[3];
     }
 
     public override void UnInit()
@@ -32,6 +37,11 @@ public class UIManager : Singleton<UIManager>
         _UICanvas = trans;
         levelText = _UICanvas.Find("Exp Level").GetComponent<TMP_Text>();
         levelSlider = _UICanvas.Find("Exp Bar").GetComponent<Slider>();
+
+        levelUpPanel = _UICanvas.Find("Level Up Interface").gameObject;
+        levelUpButtons[0] = _UICanvas.Find("Level Up Interface/LevelUpButton1").GetComponent<LevelUpSelectButton>();
+        levelUpButtons[1] = _UICanvas.Find("Level Up Interface/LevelUpButton2").GetComponent<LevelUpSelectButton>();
+        levelUpButtons[2] = _UICanvas.Find("Level Up Interface/LevelUpButton3").GetComponent<LevelUpSelectButton>();
     }
 
     public void UpdateExperience(int currentExp, int levelExp, int currentLevel)

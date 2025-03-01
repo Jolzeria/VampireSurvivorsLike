@@ -5607,7 +5607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50e2ef66d9a6a946af5f85708503d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damageAmount: 0
   lifeTime: 3
   growSpeed: 5
   shouldKnockBack: 1
@@ -5658,10 +5658,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c133b24cc3ec52841bb17ce972d8e231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 360
+  stats:
+  - speed: 1
+    damage: 5
+    range: 1
+    timeBetweenAttacks: 8
+    amount: 1
+    duration: 7
+  weaponLevel: 0
+  rotateSpeed: 120
   holder: {fileID: 2731034657436157900}
   fireballToSpawn: {fileID: 4910433167389920532}
   timeBetweenSpawn: 4
+  enemyDamager: {fileID: 712937915184628367}
 --- !u!1 &8536607202687198285
 GameObject:
   m_ObjectHideFlags: 0

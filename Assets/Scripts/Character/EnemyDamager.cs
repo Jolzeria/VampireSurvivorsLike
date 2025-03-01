@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyDamager : MonoBehaviour
 {
-    public float damage;
+    public float damageAmount;
 
     public float lifeTime, growSpeed = 5f;
     private Vector3 targetSize;
@@ -45,7 +45,7 @@ public class EnemyDamager : MonoBehaviour
         {
             var damageInfo = new DamageInfo()
             {
-                damage = damage,
+                damage = damageAmount,
                 receiver = other.GetComponentInParent<BeUnit>(),
                 shouldKnockBack = shouldKnockBack
             };

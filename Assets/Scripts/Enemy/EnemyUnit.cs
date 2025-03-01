@@ -4,12 +4,9 @@ using UnityEngine;
 public class EnemyUnit : BeUnit
 {
     private EnemyController _enemyController;
-    [NonSerialized]
-    public EnemyType enemyType;
-    [NonSerialized]
-    public float health;
-    [NonSerialized]
-    public int expValue;
+    [HideInInspector] public EnemyType enemyType;
+    [HideInInspector] public float health;
+    [HideInInspector] public int expValue;
 
     protected override void Init()
     {
@@ -52,7 +49,7 @@ public class EnemyUnit : BeUnit
     private void DamageProcess(DamageInfo damageInfo)
     {
         var changedHp = damageInfo.damage;
-        
+
         // 扣血
         MinusAttrValue(AttributeType.CurHp, changedHp);
 

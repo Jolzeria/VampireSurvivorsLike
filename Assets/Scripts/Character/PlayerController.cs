@@ -1,10 +1,19 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public float moveSpeed;
 
     private Animator _animator;
@@ -12,6 +21,10 @@ public class PlayerController : MonoBehaviour
     private Slider _healthSlider;
 
     public float pickupRange = 1.5f;
+
+    public List<Weapon> unassignedWeapons, assignedWeapons;
+
+    public int maxWeapons = 3;
     
     void Start()
     {
@@ -28,9 +41,12 @@ public class PlayerController : MonoBehaviour
         {
             yield return null;
         }
-        
+
         _healthSlider.maxValue = _playerUnit.GetAttrValue(AttributeType.MaxHp);
         SetSliderValue();
+
+        yield return new WaitForSeconds(1);
+        AddWeapon(Random.Range(0, unassignedWeapons.Count));
     }
 
     void Update()
@@ -53,7 +69,7 @@ public class PlayerController : MonoBehaviour
             _animator.SetInteger("movingStatus", 0);
             return;
         }
-        
+
         if (Mathf.Abs(move.x) > Mathf.Abs(move.y))
         {
             if (move.x > 0)
@@ -73,5 +89,24 @@ public class PlayerController : MonoBehaviour
     public void SetSliderValue()
     {
         _healthSlider.value = _playerUnit.GetAttrValue(AttributeType.CurHp);
+    }
+
+    public void AddWeapon(int weaponNumber)
+    {
+        if (weaponNumber < unassignedWeapons.Count)
+        {
+            assignedWeapons.Add(unassignedWeapons[weaponNumber]);
+            unassignedWeapons[weaponNumber].gameObject.SetActive(true);
+            
+            unassignedWeapons.RemoveAt(weaponNumber);
+        }
+    }
+    
+    public void AddWeapon(Weapon weaponToAdd)
+    {
+        weaponToAdd.gameObject.SetActive(true);
+        
+        assignedWeapons.Add(weaponToAdd);
+        unassignedWeapons.Remove(weaponToAdd);
     }
 }
