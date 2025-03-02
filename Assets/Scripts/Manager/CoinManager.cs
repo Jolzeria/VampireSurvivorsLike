@@ -16,6 +16,8 @@ public class CoinManager : Singleton<CoinManager>
     public override void UnInit()
     {
         base.UnInit();
+
+        currentCoins = 0;
     }
 
     public void AddCoins(int coinsNum)

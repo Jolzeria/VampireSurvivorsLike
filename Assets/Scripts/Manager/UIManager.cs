@@ -20,6 +20,12 @@ public class UIManager : Singleton<UIManager>
 
     private TMP_Text coinText;
     private TMP_Text timeText;
+
+    private GameObject gameEndPanel;
+    private TMP_Text deathText;
+    private TMP_Text winText;
+
+    public GameObject pausePanel;
     
     public override void Init()
     {
@@ -58,6 +64,12 @@ public class UIManager : Singleton<UIManager>
         healthUpgradeDisplay = _UICanvas.Find("Level Up Interface/PlayerStatUpgrade-Health").GetComponent<PlayerStatUpgradeDisplay>();
         pickupRandeUpgradeDisplay = _UICanvas.Find("Level Up Interface/PlayerStatUpgrade-PickupRange").GetComponent<PlayerStatUpgradeDisplay>();
         maxWeaponsUpgradeDisplay = _UICanvas.Find("Level Up Interface/PlayerStatUpgrade-MaxWeapons").GetComponent<PlayerStatUpgradeDisplay>();
+
+        gameEndPanel = _UICanvas.Find("Game End Panel").gameObject;
+        deathText = gameEndPanel.transform.Find("DeathText").GetComponent<TMP_Text>();
+        winText = gameEndPanel.transform.Find("WinText").GetComponent<TMP_Text>();
+
+        pausePanel = _UICanvas.Find("Pause Panel").gameObject;
     }
 
     public void UpdateExperience(int currentExp, int levelExp, int currentLevel)
@@ -79,5 +91,19 @@ public class UIManager : Singleton<UIManager>
         float seconds = Mathf.FloorToInt(time % 60f);
 
         timeText.text = "剩余时间: " + minutes.ToString("00") + ":" + seconds.ToString("00");
+    }
+
+    public void ShowWinPanel()
+    {
+        winText.gameObject.SetActive(true);
+        deathText.gameObject.SetActive(false);
+        gameEndPanel.SetActive(true);
+    }
+
+    public void ShowDeathPanel()
+    {
+        winText.gameObject.SetActive(false);
+        deathText.gameObject.SetActive(true);
+        gameEndPanel.SetActive(true);
     }
 }

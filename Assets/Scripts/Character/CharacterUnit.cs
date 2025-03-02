@@ -85,7 +85,7 @@ public class CharacterUnit : BeUnit
             prefab = Resources.Load<GameObject>("Player Death Effect");
             var obj = GameObject.Instantiate(prefab, transform.position, transform.rotation);
             
-            LevelManager.Instance.EndGame();
+            LevelManager.Instance.EndGame(2);
         }
     }
 }

@@ -9,9 +9,16 @@ public class LogicFrame : MonoBehaviour
         FindInstance();
         
         CharacterManager.Instance.Init();
+        DamageTextPool.Instance.Init();
         DamageTextPool.Instance.SetParent(transform.Find("DamageTextPool"));
+        DamageTextManager.Instance.Init();
         DamageTextManager.Instance.SetCanvas(transform.Find("DamageCanvas"));
+        ExperienceManager.Instance.Init();
+        UIManager.Instance.Init();
         UIManager.Instance.SetCanvas(transform.Find("UI Canvas"));
+        CharacterStatManager.Instance.Init();
+        LevelManager.Instance.Init();
+        CoinManager.Instance.Init();
     }
 
     private void Start()
@@ -20,6 +27,7 @@ public class LogicFrame : MonoBehaviour
 
     private void OnDestroy()
     {
+        CoinManager.Instance.UnInit();
         LevelManager.Instance.UnInit();
         CharacterStatManager.Instance.UnInit();
         UIManager.Instance.UnInit();
