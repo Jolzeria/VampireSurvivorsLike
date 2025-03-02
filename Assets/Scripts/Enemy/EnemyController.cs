@@ -8,10 +8,14 @@ public class EnemyController : MonoBehaviour
     private Transform _target;
 
     public float moveSpeed;
+
     public float damage;
+
     // 伤害间隔
     public float hitWaitTime = 1f;
+
     private float hitTimer;
+
     // 怪物生命值
     public float health;
 
@@ -21,7 +25,7 @@ public class EnemyController : MonoBehaviour
 
     public EnemyType enemyType;
     public int expValue = 1;
-    
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -35,31 +39,35 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (hitTimer > 0f)
+        if (InstanceManager.Instance.Get(InstanceType.Player).gameObject.activeSelf)
         {
-            hitTimer -= Time.deltaTime;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        // 击退
-        if (knockBackTimer > 0)
-        {
-            knockBackTimer -= Time.fixedDeltaTime;
-
-            if (moveSpeed > 0)
+            // 击退
+            if (knockBackTimer > 0)
             {
-                moveSpeed = -moveSpeed * 2f;
+                knockBackTimer -= Time.deltaTime;
+
+                if (moveSpeed > 0)
+                {
+                    moveSpeed = -moveSpeed * 2f;
+                }
+
+                if (knockBackTimer <= 0)
+                {
+                    moveSpeed = Mathf.Abs(moveSpeed * .5f);
+                }
             }
 
-            if (knockBackTimer <= 0)
+            _rb.velocity = (Vector2) (_target.position - transform.position).normalized * moveSpeed;
+
+            if (hitTimer > 0f)
             {
-                moveSpeed = Mathf.Abs(moveSpeed * .5f);
+                hitTimer -= Time.deltaTime;
             }
         }
-        
-        _rb.velocity = (Vector2)(_target.position - transform.position).normalized * moveSpeed;
+        else
+        {
+            _rb.velocity = Vector2.zero;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
