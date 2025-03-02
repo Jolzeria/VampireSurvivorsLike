@@ -80,7 +80,12 @@ public class CharacterUnit : BeUnit
         if (curHp <= 0)
         {
             gameObject.SetActive(false);
-            return;
+            
+            GameObject prefab = null;
+            prefab = Resources.Load<GameObject>("Player Death Effect");
+            var obj = GameObject.Instantiate(prefab, transform.position, transform.rotation);
+            
+            LevelManager.Instance.EndGame();
         }
     }
 }

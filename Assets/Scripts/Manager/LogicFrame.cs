@@ -20,6 +20,7 @@ public class LogicFrame : MonoBehaviour
 
     private void OnDestroy()
     {
+        LevelManager.Instance.UnInit();
         CharacterStatManager.Instance.UnInit();
         UIManager.Instance.UnInit();
         ExperienceManager.Instance.UnInit();
@@ -36,6 +37,7 @@ public class LogicFrame : MonoBehaviour
         DamageTextManager.Instance.Update();
         UIManager.Instance.Update();
         CharacterStatManager.Instance.Update();
+        LevelManager.Instance.Update();
     }
 
     private void FixedUpdate()
