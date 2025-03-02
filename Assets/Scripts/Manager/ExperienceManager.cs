@@ -88,7 +88,7 @@ public class ExperienceManager : Singleton<ExperienceManager>
 
         // 已激活武器数小于最大武器数才显示可激活武器
         if (PlayerController.Instance.assignedWeapons.Count + PlayerController.Instance.fullyLevelWeapons.Count <
-            PlayerController.Instance.maxWeapons)
+            CharacterManager.Instance.GetMaxWeapons())
         {
             availableWeapons.AddRange(PlayerController.Instance.unassignedWeapons);
         }

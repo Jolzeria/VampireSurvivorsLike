@@ -14,20 +14,15 @@ public class PlayerController : MonoBehaviour
         Instance = this;
     }
 
-    public float moveSpeed;
-
     private Animator _animator;
     private CharacterUnit _playerUnit;
     private Slider _healthSlider;
 
-    public float pickupRange = 1.5f;
-
     // 未激活武器，已激活武器
     public List<Weapon> unassignedWeapons, assignedWeapons;
+
     // 满级武器
     [HideInInspector] public List<Weapon> fullyLevelWeapons;
-
-    public int maxWeapons = 3;
 
     void Start()
     {
@@ -64,7 +59,7 @@ public class PlayerController : MonoBehaviour
         // 切换动画
         SwitchAnime(moveInput);
 
-        transform.position += moveInput * moveSpeed * Time.deltaTime;
+        transform.position += moveInput * (CharacterManager.Instance.GetMoveSpeed() * Time.deltaTime);
     }
 
     private void SwitchAnime(Vector3 move)

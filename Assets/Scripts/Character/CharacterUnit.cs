@@ -8,7 +8,12 @@ public class CharacterUnit : BeUnit
 {
     public List<int> expLevels;
     public int levelCount = 100;
-    
+
+    public List<PlayerStatValue> moveSpeedUpgradeList;
+    public List<PlayerStatValue> maxHealthUpgradeList;
+    public List<PlayerStatValue> pickupRangeUpgradeList;
+    public List<PlayerStatValue> maxWeaponsUpgradeList;
+
     protected override void Init()
     {
         base.Init();
@@ -73,4 +78,11 @@ public class CharacterUnit : BeUnit
             return;
         }
     }
+}
+
+[Serializable]
+public class PlayerStatValue
+{
+    public int cost;
+    public float value;
 }

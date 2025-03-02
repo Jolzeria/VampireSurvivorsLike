@@ -37,10 +37,10 @@ public class ExpPickup : MonoBehaviour
             {
                 checkTimer = timeBetweenChecks;
 
-                if (Vector3.Distance(transform.position, _playerTrans.position) < _playerController.pickupRange)
+                if (Vector3.Distance(transform.position, _playerTrans.position) < CharacterManager.Instance.GetPickupRange())
                 {
                     isMovingToPlayer = true;
-                    moveSpeed += _playerController.moveSpeed;
+                    moveSpeed += CharacterManager.Instance.GetMoveSpeed();
                 }
             }
         }

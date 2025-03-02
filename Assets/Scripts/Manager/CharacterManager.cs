@@ -4,24 +4,56 @@ using UnityEngine;
 
 public class CharacterManager : Singleton<CharacterManager>
 {
-    private Transform player;
+    private Transform _player;
+    private CharacterUnit _playerUnit;
     
     public override void Init()
     {
         base.Init();
 
-        player = InstanceManager.Instance.Get(InstanceType.Player);
+        _player = InstanceManager.Instance.Get(InstanceType.Player);
+        _playerUnit = _player.GetComponent<CharacterUnit>();
     }
 
     public override void UnInit()
     {
         base.UnInit();
 
-        player = null;
+        _player = null;
     }
 
     public Transform GetTransform()
     {
-        return player;
+        return _player;
+    }
+    
+    public CharacterUnit GetUnit()
+    {
+        return _playerUnit;
+    }
+    
+    public float GetCurHP()
+    {
+        return _playerUnit.GetAttrValue(AttributeType.CurHp);
+    }
+    
+    public float GetMaxHP()
+    {
+        return _playerUnit.GetAttrValue(AttributeType.MaxHp);
+    }
+
+    public float GetMoveSpeed()
+    {
+        return _playerUnit.GetAttrValue(AttributeType.MoveSpeed);
+    }
+    
+    public float GetPickupRange()
+    {
+        return _playerUnit.GetAttrValue(AttributeType.PickupRange);
+    }
+    
+    public float GetMaxWeapons()
+    {
+        return _playerUnit.GetAttrValue(AttributeType.MaxWeapons);
     }
 }

@@ -5,11 +5,16 @@ public enum AttributeType
     None,
     CurHp,
     MaxHp,
-    ATK,
-    DEF,
-    Score,
+    HpLevel,
     Exp,
     Level,
+    PickupRange,
+    PickupRangeLevel,
+    MoveSpeed,
+    MoveSpeedLevel,
+    MaxWeapons,
+    MaxWeaponsLevel,
+    Score,
     Max
 }
 

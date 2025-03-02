@@ -79,11 +79,9 @@ public class EnemyController : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && hitTimer <= 0f)
         {
             var enemyUnit = GetComponent<BeUnit>();
-            var snapShot = new SnapShot(enemyUnit);
             var damageInfo = new DamageInfo()
             {
                 damage = damage,
-                snapShot = snapShot,
                 attacker = enemyUnit,
                 receiver = other.collider.GetComponentInParent<BeUnit>()
             };
