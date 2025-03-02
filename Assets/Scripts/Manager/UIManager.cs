@@ -13,6 +13,11 @@ public class UIManager : Singleton<UIManager>
     public GameObject levelUpPanel;
     public LevelUpSelectButton[] levelUpButtons;
 
+    public PlayerStatUpgradeDisplay moveSpeedUpgradeDisplay;
+    public PlayerStatUpgradeDisplay healthUpgradeDisplay;
+    public PlayerStatUpgradeDisplay pickupRandeUpgradeDisplay;
+    public PlayerStatUpgradeDisplay maxWeaponsUpgradeDisplay;
+
     private TMP_Text coinText;
     
     public override void Init()
@@ -46,6 +51,11 @@ public class UIManager : Singleton<UIManager>
         levelUpButtons[2] = _UICanvas.Find("Level Up Interface/LevelUpButton3").GetComponent<LevelUpSelectButton>();
 
         coinText = _UICanvas.Find("Coin Text").GetComponent<TMP_Text>();
+
+        moveSpeedUpgradeDisplay = _UICanvas.Find("Level Up Interface/PlayerStatUpgrade-MoveSpeed").GetComponent<PlayerStatUpgradeDisplay>();
+        healthUpgradeDisplay = _UICanvas.Find("Level Up Interface/PlayerStatUpgrade-Health").GetComponent<PlayerStatUpgradeDisplay>();
+        pickupRandeUpgradeDisplay = _UICanvas.Find("Level Up Interface/PlayerStatUpgrade-PickupRange").GetComponent<PlayerStatUpgradeDisplay>();
+        maxWeaponsUpgradeDisplay = _UICanvas.Find("Level Up Interface/PlayerStatUpgrade-MaxWeapons").GetComponent<PlayerStatUpgradeDisplay>();
     }
 
     public void UpdateExperience(int currentExp, int levelExp, int currentLevel)

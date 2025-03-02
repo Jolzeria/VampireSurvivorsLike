@@ -27,6 +27,11 @@ public class CharacterUnit : BeUnit
         }
 
         ExperienceManager.Instance.expLevels = expLevels;
+
+        CharacterStatManager.Instance.moveSpeedUpgradeList = moveSpeedUpgradeList;
+        CharacterStatManager.Instance.maxHealthUpgradeList = maxHealthUpgradeList;
+        CharacterStatManager.Instance.pickupRangeUpgradeList = pickupRangeUpgradeList;
+        CharacterStatManager.Instance.maxWeaponsUpgradeList = maxWeaponsUpgradeList;
     }
 
     protected override void UnInit()

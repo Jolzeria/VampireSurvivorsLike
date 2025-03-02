@@ -32,14 +32,19 @@ public class CharacterManager : Singleton<CharacterManager>
         return _playerUnit;
     }
     
-    public float GetCurHP()
+    public float GetCurHp()
     {
         return _playerUnit.GetAttrValue(AttributeType.CurHp);
     }
     
-    public float GetMaxHP()
+    public float GetMaxHp()
     {
         return _playerUnit.GetAttrValue(AttributeType.MaxHp);
+    }
+    
+    public int GetHpLevel()
+    {
+        return (int)_playerUnit.GetAttrValue(AttributeType.HpLevel);
     }
 
     public float GetMoveSpeed()
@@ -47,13 +52,28 @@ public class CharacterManager : Singleton<CharacterManager>
         return _playerUnit.GetAttrValue(AttributeType.MoveSpeed);
     }
     
+    public int GetMoveSpeedLevel()
+    {
+        return (int)_playerUnit.GetAttrValue(AttributeType.MoveSpeedLevel);
+    }
+    
     public float GetPickupRange()
     {
         return _playerUnit.GetAttrValue(AttributeType.PickupRange);
     }
     
+    public int GetPickupRangeLevel()
+    {
+        return (int)_playerUnit.GetAttrValue(AttributeType.PickupRangeLevel);
+    }
+    
     public float GetMaxWeapons()
     {
         return _playerUnit.GetAttrValue(AttributeType.MaxWeapons);
+    }
+    
+    public int GetMaxWeaponsLevel()
+    {
+        return (int)_playerUnit.GetAttrValue(AttributeType.MaxWeaponsLevel);
     }
 }

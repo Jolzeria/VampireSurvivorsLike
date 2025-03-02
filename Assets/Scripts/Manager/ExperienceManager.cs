@@ -120,5 +120,7 @@ public class ExperienceManager : Singleton<ExperienceManager>
                 UIManager.Instance.levelUpButtons[i].gameObject.SetActive(false);
             }
         }
+        
+        CharacterStatManager.Instance.UpdateDisplay();
     }
 }
