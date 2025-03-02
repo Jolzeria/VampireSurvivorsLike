@@ -35,6 +35,8 @@ public class SpinWeapon : Weapon
                     .gameObject;
                 obj.SetActive(true);
             }
+            
+            SFXManager.instance.PlaySFXPitched(6);
         }
 
         if (isStatsUpdated)

@@ -34,6 +34,8 @@ public class ExperienceManager : Singleton<ExperienceManager>
 
     public void GetExp(int expValue)
     {
+        SFXManager.instance.PlaySFXPitched(2);
+        
         _playerUnit.AddAttrValue(AttributeType.Exp, expValue);
 
         if (_playerUnit.GetAttrValue(AttributeType.Exp) >=

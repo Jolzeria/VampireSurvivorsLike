@@ -52,6 +52,8 @@ public class MeleeWeapon : Weapon
                     transform).gameObject;
                 obj.SetActive(true);
             }
+            
+            SFXManager.instance.PlaySFXPitched(7);
         }
     }
 

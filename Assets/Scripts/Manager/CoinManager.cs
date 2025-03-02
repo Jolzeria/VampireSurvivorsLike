@@ -22,6 +22,8 @@ public class CoinManager : Singleton<CoinManager>
 
     public void AddCoins(int coinsNum)
     {
+        SFXManager.instance.PlaySFXPitched(2);
+        
         currentCoins += coinsNum;
 
         UIManager.Instance.UpdateCoins();

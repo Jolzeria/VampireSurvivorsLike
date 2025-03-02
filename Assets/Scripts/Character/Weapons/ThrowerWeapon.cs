@@ -33,6 +33,8 @@ public class ThrowerWeapon : Weapon
                     .gameObject;
                 obj.SetActive(true);
             }
+            
+            SFXManager.instance.PlaySFXPitched(4);
         }
     }
 

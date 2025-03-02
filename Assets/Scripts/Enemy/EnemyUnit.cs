@@ -69,9 +69,14 @@ public class EnemyUnit : BeUnit
                 CoinManager.Instance.DropCoin(transform.position, coinValue);
             }
             
+            SFXManager.instance.PlaySFXPitched(0);
+            
             Destroy(gameObject);
             return;
         }
+        
+        // 播放击中音效
+        SFXManager.instance.PlaySFXPitched(1);
 
         // 控制击退
         if (damageInfo.shouldKnockBack)
