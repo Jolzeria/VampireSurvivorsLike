@@ -57,7 +57,7 @@ public class CharacterStatManager : Singleton<CharacterStatManager>
         }
 
         var pickupRangeLevel = CharacterManager.Instance.GetPickupRangeLevel();
-        if (hpLevel < pickupRangeUpgradeList.Count - 1)
+        if (pickupRangeLevel < pickupRangeUpgradeList.Count - 1)
         {
             UIManager.Instance.pickupRandeUpgradeDisplay.UpdateDisplay(
                 pickupRangeUpgradeList[pickupRangeLevel + 1].cost,
@@ -69,7 +69,7 @@ public class CharacterStatManager : Singleton<CharacterStatManager>
         }
 
         var maxWeaponsLevel = CharacterManager.Instance.GetMaxWeaponsLevel();
-        if (hpLevel < maxWeaponsUpgradeList.Count - 1)
+        if (maxWeaponsLevel < maxWeaponsUpgradeList.Count - 1)
         {
             UIManager.Instance.maxWeaponsUpgradeDisplay.UpdateDisplay(maxWeaponsUpgradeList[maxWeaponsLevel + 1].cost,
                 maxWeaponsUpgradeList[maxWeaponsLevel].value, maxWeaponsUpgradeList[maxWeaponsLevel + 1].value);
