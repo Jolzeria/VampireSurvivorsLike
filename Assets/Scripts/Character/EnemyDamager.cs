@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class EnemyDamager : MonoBehaviour
 {
-    // 造成伤害量
-    public float damageAmount = 5f;
-    // 武器存活时长
-    public bool enableLifeTime = false;
-    public float lifeTime = 5f;
-    // 武器创建消失的渐变速度
-    public float growSpeed = 5f;
+    [Tooltip("伤害")] public float damageAmount = 5f;
+    [Tooltip("是否随时间销毁")] public bool enableLifeTime = false;
+    [Tooltip("存活时长")] public float lifeTime = 5f;
+
+    [Tooltip("武器创建消失的渐变速度")] public float growSpeed = 5f;
     private Vector3 _targetSize;
 
     [Tooltip("是否击退")] public bool shouldKnockBack;
@@ -22,6 +20,8 @@ public class EnemyDamager : MonoBehaviour
     [Tooltip("两次持续伤害间隔")] public float timeBetweenDamage;
     private float _continuousDamageTimer;
     private List<EnemyUnit> _enemiesInRange;
+
+    [Tooltip("是否在碰撞时销毁")] public bool isDestroyOnImpact;
 
     void Start()
     {
@@ -89,13 +89,21 @@ public class EnemyDamager : MonoBehaviour
         {
             if (!isContinuousDamage)
             {
-                var damageInfo = new DamageInfo()
+                if (other.gameObject.CompareTag("Enemy"))
                 {
-                    damage = damageAmount,
-                    receiver = other.GetComponentInParent<BeUnit>(),
-                    shouldKnockBack = shouldKnockBack
-                };
-                EventHandler.ExecuteEvent(damageInfo.receiver, GameEventEnum.DamageProcess, damageInfo);
+                    var damageInfo = new DamageInfo()
+                    {
+                        damage = damageAmount,
+                        receiver = other.GetComponentInParent<BeUnit>(),
+                        shouldKnockBack = shouldKnockBack
+                    };
+                    EventHandler.ExecuteEvent(damageInfo.receiver, GameEventEnum.DamageProcess, damageInfo);
+
+                    if (isDestroyOnImpact)
+                    {
+                        Destroy(gameObject);
+                    }
+                }
             }
             else
             {

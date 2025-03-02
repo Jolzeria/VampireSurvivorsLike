@@ -50,7 +50,6 @@ public class SpinWeapon : Weapon
         enemyDamager.damageAmount = stats[weaponLevel].damage;
         transform.localScale = Vector3.one * stats[weaponLevel].range;
         timeBetweenSpawn = stats[weaponLevel].timeBetweenAttacks;
-        enemyDamager.enableLifeTime = true;
         enemyDamager.lifeTime = stats[weaponLevel].duration;
         spawnTimer = 0f;
     }

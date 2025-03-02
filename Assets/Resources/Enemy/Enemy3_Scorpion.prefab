@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 454727064138059489}
   - component: {fileID: 2304973461491515933}
   - component: {fileID: 6794977470151709359}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy3_Scorpion
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -229,3 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097b0af268fe5ed409f271ca0d260244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
+  health: 0
+  expValue: 0

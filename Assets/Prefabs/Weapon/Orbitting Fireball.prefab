@@ -224,8 +224,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 891508523
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -196789849, guid: 99f10abcf979e904b883da0c6922d74f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -286,13 +286,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 0
-  enableLifeTime: 0
+  enableLifeTime: 1
   lifeTime: 3
   growSpeed: 5
   shouldKnockBack: 1
   destroyParent: 1
   isContinuousDamage: 0
   timeBetweenDamage: 0
+  isDestroyOnImpact: 0
 --- !u!1 &5876359270881207410
 GameObject:
   m_ObjectHideFlags: 0
