@@ -43,7 +43,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void ResetTimer()
     {
-        timer = 10f;
+        timer = 600f;
     }
 
     public void EndGame(int type)
