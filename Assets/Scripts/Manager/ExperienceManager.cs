@@ -120,7 +120,13 @@ public class ExperienceManager : Singleton<ExperienceManager>
                 UIManager.Instance.levelUpButtons[i].gameObject.SetActive(false);
             }
         }
-        
+
         CharacterStatManager.Instance.UpdateDisplay();
+    }
+
+    public void SkipLevelUp()
+    {
+        UIManager.Instance.levelUpPanel.gameObject.SetActive(false);
+        Time.timeScale = 1f;
     }
 }

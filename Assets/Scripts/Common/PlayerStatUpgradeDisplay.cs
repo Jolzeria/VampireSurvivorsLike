@@ -28,4 +28,28 @@ public class PlayerStatUpgradeDisplay : MonoBehaviour
         costText.text = "已达最高等级";
         upgradeButton.SetActive(false);
     }
+    
+    public void PurchaseMoveSpeed()
+    {
+        CharacterStatManager.Instance.PurchaseMoveSpeed();
+        ExperienceManager.Instance.SkipLevelUp();
+    }
+
+    public void PurchaseHealth()
+    {
+        CharacterStatManager.Instance.PurchaseHealth();
+        ExperienceManager.Instance.SkipLevelUp();
+    }
+
+    public void PurchasePickupRange()
+    {
+        CharacterStatManager.Instance.PurchasePickupRange();
+        ExperienceManager.Instance.SkipLevelUp();
+    }
+
+    public void PurchaseMaxWeapons()
+    {
+        CharacterStatManager.Instance.PurchaseMaxWeapons();
+        ExperienceManager.Instance.SkipLevelUp();
+    }
 }

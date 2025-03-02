@@ -44,7 +44,7 @@ public class CharacterStatManager : Singleton<CharacterStatManager>
         {
             UIManager.Instance.moveSpeedUpgradeDisplay.ShowMaxLevel(CharacterManager.Instance.GetMoveSpeed());
         }
-        
+
         var hpLevel = CharacterManager.Instance.GetHpLevel();
         if (hpLevel < maxHealthUpgradeList.Count - 1)
         {
@@ -55,18 +55,19 @@ public class CharacterStatManager : Singleton<CharacterStatManager>
         {
             UIManager.Instance.healthUpgradeDisplay.ShowMaxLevel(CharacterManager.Instance.GetMaxHp());
         }
-        
+
         var pickupRangeLevel = CharacterManager.Instance.GetPickupRangeLevel();
         if (hpLevel < pickupRangeUpgradeList.Count - 1)
         {
-            UIManager.Instance.pickupRandeUpgradeDisplay.UpdateDisplay(pickupRangeUpgradeList[pickupRangeLevel + 1].cost,
+            UIManager.Instance.pickupRandeUpgradeDisplay.UpdateDisplay(
+                pickupRangeUpgradeList[pickupRangeLevel + 1].cost,
                 pickupRangeUpgradeList[pickupRangeLevel].value, pickupRangeUpgradeList[pickupRangeLevel + 1].value);
         }
         else
         {
             UIManager.Instance.pickupRandeUpgradeDisplay.ShowMaxLevel(CharacterManager.Instance.GetPickupRange());
         }
-        
+
         var maxWeaponsLevel = CharacterManager.Instance.GetMaxWeaponsLevel();
         if (hpLevel < maxWeaponsUpgradeList.Count - 1)
         {
@@ -77,5 +78,52 @@ public class CharacterStatManager : Singleton<CharacterStatManager>
         {
             UIManager.Instance.maxWeaponsUpgradeDisplay.ShowMaxLevel(CharacterManager.Instance.GetMaxWeapons());
         }
+    }
+
+    public void PurchaseMoveSpeed()
+    {
+        var charUnit = CharacterManager.Instance.GetUnit();
+        charUnit.AddAttrValue(AttributeType.MoveSpeedLevel, 1f);
+        CoinManager.Instance.SpendCoins(moveSpeedUpgradeList[CharacterManager.Instance.GetMoveSpeedLevel()].cost);
+        UpdateDisplay();
+
+        charUnit.SetAttrValue(AttributeType.MoveSpeed,
+            moveSpeedUpgradeList[CharacterManager.Instance.GetMoveSpeedLevel()].value);
+    }
+
+    public void PurchaseHealth()
+    {
+        var charUnit = CharacterManager.Instance.GetUnit();
+        charUnit.AddAttrValue(AttributeType.HpLevel, 1f);
+        CoinManager.Instance.SpendCoins(maxHealthUpgradeList[CharacterManager.Instance.GetHpLevel()].cost);
+        UpdateDisplay();
+
+        charUnit.SetAttrValue(AttributeType.MaxHp,
+            maxHealthUpgradeList[CharacterManager.Instance.GetHpLevel()].value);
+        charUnit.AddAttrValue(AttributeType.CurHp,
+            (maxHealthUpgradeList[CharacterManager.Instance.GetHpLevel()].value -
+             maxHealthUpgradeList[CharacterManager.Instance.GetHpLevel() - 1].value));
+    }
+
+    public void PurchasePickupRange()
+    {
+        var charUnit = CharacterManager.Instance.GetUnit();
+        charUnit.AddAttrValue(AttributeType.PickupRangeLevel, 1f);
+        CoinManager.Instance.SpendCoins(pickupRangeUpgradeList[CharacterManager.Instance.GetPickupRangeLevel()].cost);
+        UpdateDisplay();
+
+        charUnit.SetAttrValue(AttributeType.PickupRange,
+            pickupRangeUpgradeList[CharacterManager.Instance.GetPickupRangeLevel()].value);
+    }
+
+    public void PurchaseMaxWeapons()
+    {
+        var charUnit = CharacterManager.Instance.GetUnit();
+        charUnit.AddAttrValue(AttributeType.MaxWeaponsLevel, 1f);
+        CoinManager.Instance.SpendCoins(maxWeaponsUpgradeList[CharacterManager.Instance.GetMaxWeaponsLevel()].cost);
+        UpdateDisplay();
+
+        charUnit.SetAttrValue(AttributeType.MaxWeapons,
+            maxWeaponsUpgradeList[CharacterManager.Instance.GetMaxWeaponsLevel()].value);
     }
 }
