@@ -200,7 +200,7 @@ MonoBehaviour:
   hitWaitTime: 1
   health: 20
   knockBackTime: 0.2
-  enemyType: 0
+  enemyType: 2
   expValue: 3
 --- !u!114 &2304973461491515933
 MonoBehaviour:

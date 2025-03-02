@@ -1,12 +1,16 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyUnit : BeUnit
 {
     private EnemyController _enemyController;
-    [HideInInspector] public EnemyType enemyType;
     [HideInInspector] public float health;
+    
+    [HideInInspector] public EnemyType enemyType;
     [HideInInspector] public int expValue;
+    [HideInInspector] public int coinValue = 1;
+    [HideInInspector] public float coinDropRate = .5f;
 
     protected override void Init()
     {
@@ -59,6 +63,12 @@ public class EnemyUnit : BeUnit
         {
             // 生成经验
             ExperienceManager.Instance.SpawnExp(transform.position, enemyType, expValue);
+            // 随机生成金币
+            if (Random.value <= coinDropRate)
+            {
+                CoinManager.Instance.DropCoin(transform.position, coinValue);
+            }
+            
             Destroy(gameObject);
             return;
         }

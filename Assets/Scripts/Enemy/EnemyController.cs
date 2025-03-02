@@ -16,15 +16,15 @@ public class EnemyController : MonoBehaviour
 
     private float hitTimer;
 
-    // 怪物生命值
-    public float health;
+    [Tooltip("怪物生命值")] public float health;
 
-    // 击退持续时间
-    public float knockBackTime = .5f;
+    [Tooltip("击退持续时间")] public float knockBackTime = .5f;
     private float knockBackTimer;
 
     public EnemyType enemyType;
-    public int expValue = 1;
+    [Tooltip("经验值")] public int expValue = 1;
+    [Tooltip("掉落金币数")] public int coinValue = 1;
+    [Tooltip("掉落金币概率")] public float coinDropRate = .5f;
 
     private void Start()
     {
@@ -32,9 +32,12 @@ public class EnemyController : MonoBehaviour
         _target = InstanceManager.Instance.Get(InstanceType.Player);
         hitTimer = hitWaitTime;
 
-        GetComponent<EnemyUnit>().health = health;
-        GetComponent<EnemyUnit>().enemyType = enemyType;
-        GetComponent<EnemyUnit>().expValue = expValue;
+        var enemyUnit = GetComponent<EnemyUnit>();
+        enemyUnit.health = health;
+        enemyUnit.enemyType = enemyType;
+        enemyUnit.expValue = expValue;
+        enemyUnit.coinValue = coinValue;
+        enemyUnit.coinDropRate = coinDropRate;
     }
 
     private void Update()
