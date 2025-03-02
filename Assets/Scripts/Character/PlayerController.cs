@@ -50,7 +50,8 @@ public class PlayerController : MonoBehaviour
         SetSliderValue();
 
         yield return new WaitForSeconds(1);
-        AddWeapon(Random.Range(0, unassignedWeapons.Count));
+        if (assignedWeapons.Count == 0)
+            AddWeapon(Random.Range(0, unassignedWeapons.Count));
     }
 
     void Update()
