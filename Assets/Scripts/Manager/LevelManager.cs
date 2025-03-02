@@ -43,7 +43,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void ResetTimer()
     {
-        timer = 1200f;
+        timer = 10f;
     }
 
     public void EndGame(int type)
@@ -55,8 +55,10 @@ public class LevelManager : Singleton<LevelManager>
 
     IEnumerator EndGameCo(int type)
     {
-        yield return new WaitForSeconds(1);
+        if (type == 2)
+            yield return new WaitForSeconds(1);
 
+        Time.timeScale = 0f;
         if (type == 1)
             UIManager.Instance.ShowWinPanel();
         else if (type == 2)
